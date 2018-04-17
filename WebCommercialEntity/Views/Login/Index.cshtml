@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <p><h1 style="color:darkred;margin:0;">Page de connexion des vendeurs</h1></p>
+    <div class="container">
+        <form method="post" action="/Login/CheckUser">
+            <h2 style="color:forestgreen;">Se connecter</h2>
+            <label for="inputUsername" class="label label-default">Nom d'utilisateur</label>
+            <input type="text" required class="form-control" name="username" id="inputUsername" placeholder="Nom d'utilisateur ... ">
+            <br />
+            <label for="inputPassword" class="label label-default">Mot de passe</label>
+            <input type="password" required class="form-control" name="password" id="inputPassword" placeholder="Mot de passe ...">
+            <br />
+           
+            <br />
+            <button type="submit" class="btn btn-primary">Connexion</button>
+        </form>
+        @if (TempData["error"] != null && (bool)TempData["error"])
+        {
+            <br/><span style="color:darkred;font-weight:bold;">Login ou mot de passe incorrect</span>
+        }
+    </div>
+</body>
+</html>

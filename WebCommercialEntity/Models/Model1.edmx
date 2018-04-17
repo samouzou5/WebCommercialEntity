@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CommercialModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="articles">
+          <Key>
+            <PropertyRef Name="NO_ARTICLE" />
+          </Key>
+          <Property Name="NO_ARTICLE" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="LIB_ARTICLE" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="QTE_DISPO" Type="int" Nullable="false" />
+          <Property Name="VILLE_ART" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="PRIX_ART" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="INTERROMPU" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clientel">
+          <Key>
+            <PropertyRef Name="NO_CLIENT" />
+          </Key>
+          <Property Name="NO_CLIENT" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="SOCIETE" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="NOM_CL" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="PRENOM_CL" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ADRESSE_CL" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="VILLE_CL" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="CODE_POST_CL" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="commandes">
+          <Key>
+            <PropertyRef Name="NO_COMMAND" />
+          </Key>
+          <Property Name="NO_COMMAND" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NO_VENDEUR" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NO_CLIENT" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="DATE_CDE" Type="date" Nullable="false" />
+          <Property Name="FACTURE" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="compose">
+          <Key>
+            <PropertyRef Name="NO_COMPOSE" />
+            <PropertyRef Name="NO_COMPOSANT" />
+          </Key>
+          <Property Name="NO_COMPOSE" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NO_COMPOSANT" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="QTE_COMPOSANT" Type="int" />
+        </EntityType>
+        <EntityType Name="detail_cde">
+          <Key>
+            <PropertyRef Name="NO_COMMAND" />
+            <PropertyRef Name="NO_ARTICLE" />
+          </Key>
+          <Property Name="NO_COMMAND" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NO_ARTICLE" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="QTE_CDEE" Type="int" />
+          <Property Name="LIVREE" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="utilisateur">
+          <Key>
+            <PropertyRef Name="idLogin" />
+          </Key>
+          <Property Name="idLogin" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="motDePasse" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fonction" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendeur">
+          <Key>
+            <PropertyRef Name="NO_VENDEUR" />
+          </Key>
+          <Property Name="NO_VENDEUR" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NO_VEND_CHEF_EQ" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NOM_VEND" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="PRENOM_VEND" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="DATE_EMBAU" Type="date" Nullable="false" />
+          <Property Name="VILLE_VEND" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="SALAIRE_VEND" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="COMMISSION" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="fk_login_u">
+          <End Role="vendeur" Type="Self.vendeur" Multiplicity="1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="vendeur">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="idLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_commandes">
+          <End Role="vendeur" Type="Self.vendeur" Multiplicity="1" />
+          <End Role="commandes" Type="Self.commandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendeur">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Principal>
+            <Dependent Role="commandes">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_compose">
+          <End Role="articles" Type="Self.articles" Multiplicity="1" />
+          <End Role="compose" Type="Self.compose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articles">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Principal>
+            <Dependent Role="compose">
+              <PropertyRef Name="NO_COMPOSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_detail_cde">
+          <End Role="commandes" Type="Self.commandes" Multiplicity="1" />
+          <End Role="detail_cde" Type="Self.detail_cde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="commandes">
+              <PropertyRef Name="NO_COMMAND" />
+            </Principal>
+            <Dependent Role="detail_cde">
+              <PropertyRef Name="NO_COMMAND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_vendeur">
+          <End Role="vendeur" Type="Self.vendeur" Multiplicity="1" />
+          <End Role="vendeur1" Type="Self.vendeur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendeur">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Principal>
+            <Dependent Role="vendeur1">
+              <PropertyRef Name="NO_VEND_CHEF_EQ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_commandes">
+          <End Role="clientel" Type="Self.clientel" Multiplicity="1" />
+          <End Role="commandes" Type="Self.commandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientel">
+              <PropertyRef Name="NO_CLIENT" />
+            </Principal>
+            <Dependent Role="commandes">
+              <PropertyRef Name="NO_CLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_compose">
+          <End Role="articles" Type="Self.articles" Multiplicity="1" />
+          <End Role="compose" Type="Self.compose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articles">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Principal>
+            <Dependent Role="compose">
+              <PropertyRef Name="NO_COMPOSANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_detail_cde">
+          <End Role="articles" Type="Self.articles" Multiplicity="1" />
+          <End Role="detail_cde" Type="Self.detail_cde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articles">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Principal>
+            <Dependent Role="detail_cde">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CommercialModelStoreContainer">
+          <EntitySet Name="articles" EntityType="Self.articles" Schema="commercial" store:Type="Tables" />
+          <EntitySet Name="clientel" EntityType="Self.clientel" Schema="commercial" store:Type="Tables" />
+          <EntitySet Name="commandes" EntityType="Self.commandes" Schema="commercial" store:Type="Tables" />
+          <EntitySet Name="compose" EntityType="Self.compose" Schema="commercial" store:Type="Tables" />
+          <EntitySet Name="detail_cde" EntityType="Self.detail_cde" Schema="commercial" store:Type="Tables" />
+          <EntitySet Name="utilisateur" EntityType="Self.utilisateur" Schema="commercial" store:Type="Tables" />
+          <EntitySet Name="vendeur" EntityType="Self.vendeur" Schema="commercial" store:Type="Tables" />
+          <AssociationSet Name="fk_login_u" Association="Self.fk_login_u">
+            <End Role="vendeur" EntitySet="vendeur" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_commandes" Association="Self.fk1_commandes">
+            <End Role="vendeur" EntitySet="vendeur" />
+            <End Role="commandes" EntitySet="commandes" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_compose" Association="Self.fk1_compose">
+            <End Role="articles" EntitySet="articles" />
+            <End Role="compose" EntitySet="compose" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_detail_cde" Association="Self.fk1_detail_cde">
+            <End Role="commandes" EntitySet="commandes" />
+            <End Role="detail_cde" EntitySet="detail_cde" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_vendeur" Association="Self.fk1_vendeur">
+            <End Role="vendeur" EntitySet="vendeur" />
+            <End Role="vendeur1" EntitySet="vendeur" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_commandes" Association="Self.fk2_commandes">
+            <End Role="clientel" EntitySet="clientel" />
+            <End Role="commandes" EntitySet="commandes" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_compose" Association="Self.fk2_compose">
+            <End Role="articles" EntitySet="articles" />
+            <End Role="compose" EntitySet="compose" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_detail_cde" Association="Self.fk2_detail_cde">
+            <End Role="articles" EntitySet="articles" />
+            <End Role="detail_cde" EntitySet="detail_cde" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CommercialModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CommercialEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="articles" EntityType="CommercialModel.articles" />
+          <EntitySet Name="clientel" EntityType="CommercialModel.clientel" />
+          <EntitySet Name="commandes" EntityType="CommercialModel.commandes" />
+          <EntitySet Name="compose" EntityType="CommercialModel.compose" />
+          <EntitySet Name="detail_cde" EntityType="CommercialModel.detail_cde" />
+          <EntitySet Name="utilisateur" EntityType="CommercialModel.utilisateur" />
+          <EntitySet Name="vendeur" EntityType="CommercialModel.vendeur" />
+          <AssociationSet Name="fk1_compose" Association="CommercialModel.fk1_compose">
+            <End Role="articles" EntitySet="articles" />
+            <End Role="compose" EntitySet="compose" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_compose" Association="CommercialModel.fk2_compose">
+            <End Role="articles" EntitySet="articles" />
+            <End Role="compose" EntitySet="compose" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_detail_cde" Association="CommercialModel.fk2_detail_cde">
+            <End Role="articles" EntitySet="articles" />
+            <End Role="detail_cde" EntitySet="detail_cde" />
+          </AssociationSet>
+          <AssociationSet Name="fk2_commandes" Association="CommercialModel.fk2_commandes">
+            <End Role="clientel" EntitySet="clientel" />
+            <End Role="commandes" EntitySet="commandes" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_commandes" Association="CommercialModel.fk1_commandes">
+            <End Role="vendeur" EntitySet="vendeur" />
+            <End Role="commandes" EntitySet="commandes" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_detail_cde" Association="CommercialModel.fk1_detail_cde">
+            <End Role="commandes" EntitySet="commandes" />
+            <End Role="detail_cde" EntitySet="detail_cde" />
+          </AssociationSet>
+          <AssociationSet Name="fk_login_u" Association="CommercialModel.fk_login_u">
+            <End Role="vendeur" EntitySet="vendeur" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="fk1_vendeur" Association="CommercialModel.fk1_vendeur">
+            <End Role="vendeur" EntitySet="vendeur" />
+            <End Role="vendeur1" EntitySet="vendeur" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="articles">
+          <Key>
+            <PropertyRef Name="NO_ARTICLE" />
+          </Key>
+          <Property Name="NO_ARTICLE" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="LIB_ARTICLE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="QTE_DISPO" Type="Int32" Nullable="false" />
+          <Property Name="VILLE_ART" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PRIX_ART" Type="Decimal" Nullable="false" />
+          <Property Name="INTERROMPU" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="compose" Relationship="CommercialModel.fk1_compose" FromRole="articles" ToRole="compose" />
+          <NavigationProperty Name="compose1" Relationship="CommercialModel.fk2_compose" FromRole="articles" ToRole="compose" />
+          <NavigationProperty Name="detail_cde" Relationship="CommercialModel.fk2_detail_cde" FromRole="articles" ToRole="detail_cde" />
+        </EntityType>
+        <EntityType Name="clientel">
+          <Key>
+            <PropertyRef Name="NO_CLIENT" />
+          </Key>
+          <Property Name="NO_CLIENT" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="SOCIETE" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_CL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOM_CL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ADRESSE_CL" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VILLE_CL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CODE_POST_CL" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="commandes" Relationship="CommercialModel.fk2_commandes" FromRole="clientel" ToRole="commandes" />
+        </EntityType>
+        <EntityType Name="commandes">
+          <Key>
+            <PropertyRef Name="NO_COMMAND" />
+          </Key>
+          <Property Name="NO_COMMAND" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NO_VENDEUR" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NO_CLIENT" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_CDE" Type="DateTime" Nullable="false" />
+          <Property Name="FACTURE" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="clientel" Relationship="CommercialModel.fk2_commandes" FromRole="commandes" ToRole="clientel" />
+          <NavigationProperty Name="vendeur" Relationship="CommercialModel.fk1_commandes" FromRole="commandes" ToRole="vendeur" />
+          <NavigationProperty Name="detail_cde" Relationship="CommercialModel.fk1_detail_cde" FromRole="commandes" ToRole="detail_cde" />
+        </EntityType>
+        <EntityType Name="compose">
+          <Key>
+            <PropertyRef Name="NO_COMPOSE" />
+            <PropertyRef Name="NO_COMPOSANT" />
+          </Key>
+          <Property Name="NO_COMPOSE" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NO_COMPOSANT" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="QTE_COMPOSANT" Type="Int32" />
+          <NavigationProperty Name="articles" Relationship="CommercialModel.fk1_compose" FromRole="compose" ToRole="articles" />
+          <NavigationProperty Name="articles1" Relationship="CommercialModel.fk2_compose" FromRole="compose" ToRole="articles" />
+        </EntityType>
+        <EntityType Name="detail_cde">
+          <Key>
+            <PropertyRef Name="NO_COMMAND" />
+            <PropertyRef Name="NO_ARTICLE" />
+          </Key>
+          <Property Name="NO_COMMAND" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NO_ARTICLE" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="QTE_CDEE" Type="Int32" />
+          <Property Name="LIVREE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="articles" Relationship="CommercialModel.fk2_detail_cde" FromRole="detail_cde" ToRole="articles" />
+          <NavigationProperty Name="commandes" Relationship="CommercialModel.fk1_detail_cde" FromRole="detail_cde" ToRole="commandes" />
+        </EntityType>
+        <EntityType Name="utilisateur">
+          <Key>
+            <PropertyRef Name="idLogin" />
+          </Key>
+          <Property Name="idLogin" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="motDePasse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fonction" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="vendeur" Relationship="CommercialModel.fk_login_u" FromRole="utilisateur" ToRole="vendeur" />
+        </EntityType>
+        <EntityType Name="vendeur">
+          <Key>
+            <PropertyRef Name="NO_VENDEUR" />
+          </Key>
+          <Property Name="NO_VENDEUR" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NO_VEND_CHEF_EQ" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_VEND" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOM_VEND" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_EMBAU" Type="DateTime" Nullable="false" />
+          <Property Name="VILLE_VEND" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SALAIRE_VEND" Type="Decimal" Nullable="false" />
+          <Property Name="COMMISSION" Type="Decimal" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="commandes" Relationship="CommercialModel.fk1_commandes" FromRole="vendeur" ToRole="commandes" />
+          <NavigationProperty Name="utilisateur" Relationship="CommercialModel.fk_login_u" FromRole="vendeur" ToRole="utilisateur" />
+          <NavigationProperty Name="vendeur1" Relationship="CommercialModel.fk1_vendeur" FromRole="vendeur" ToRole="vendeur1" />
+          <NavigationProperty Name="vendeur2" Relationship="CommercialModel.fk1_vendeur" FromRole="vendeur1" ToRole="vendeur" />
+        </EntityType>
+        <Association Name="fk1_compose">
+          <End Type="CommercialModel.articles" Role="articles" Multiplicity="1" />
+          <End Type="CommercialModel.compose" Role="compose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articles">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Principal>
+            <Dependent Role="compose">
+              <PropertyRef Name="NO_COMPOSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_compose">
+          <End Type="CommercialModel.articles" Role="articles" Multiplicity="1" />
+          <End Type="CommercialModel.compose" Role="compose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articles">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Principal>
+            <Dependent Role="compose">
+              <PropertyRef Name="NO_COMPOSANT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_detail_cde">
+          <End Type="CommercialModel.articles" Role="articles" Multiplicity="1" />
+          <End Type="CommercialModel.detail_cde" Role="detail_cde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articles">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Principal>
+            <Dependent Role="detail_cde">
+              <PropertyRef Name="NO_ARTICLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2_commandes">
+          <End Type="CommercialModel.clientel" Role="clientel" Multiplicity="1" />
+          <End Type="CommercialModel.commandes" Role="commandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientel">
+              <PropertyRef Name="NO_CLIENT" />
+            </Principal>
+            <Dependent Role="commandes">
+              <PropertyRef Name="NO_CLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_commandes">
+          <End Type="CommercialModel.vendeur" Role="vendeur" Multiplicity="1" />
+          <End Type="CommercialModel.commandes" Role="commandes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendeur">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Principal>
+            <Dependent Role="commandes">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_detail_cde">
+          <End Type="CommercialModel.commandes" Role="commandes" Multiplicity="1" />
+          <End Type="CommercialModel.detail_cde" Role="detail_cde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="commandes">
+              <PropertyRef Name="NO_COMMAND" />
+            </Principal>
+            <Dependent Role="detail_cde">
+              <PropertyRef Name="NO_COMMAND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_login_u">
+          <End Type="CommercialModel.vendeur" Role="vendeur" Multiplicity="1" />
+          <End Type="CommercialModel.utilisateur" Role="utilisateur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="vendeur">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="idLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1_vendeur">
+          <End Type="CommercialModel.vendeur" Role="vendeur" Multiplicity="1" />
+          <End Type="CommercialModel.vendeur" Role="vendeur1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendeur">
+              <PropertyRef Name="NO_VENDEUR" />
+            </Principal>
+            <Dependent Role="vendeur1">
+              <PropertyRef Name="NO_VEND_CHEF_EQ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CommercialModelStoreContainer" CdmEntityContainer="CommercialEntities">
+          <EntitySetMapping Name="articles">
+            <EntityTypeMapping TypeName="CommercialModel.articles">
+              <MappingFragment StoreEntitySet="articles">
+                <ScalarProperty Name="INTERROMPU" ColumnName="INTERROMPU" />
+                <ScalarProperty Name="PRIX_ART" ColumnName="PRIX_ART" />
+                <ScalarProperty Name="VILLE_ART" ColumnName="VILLE_ART" />
+                <ScalarProperty Name="QTE_DISPO" ColumnName="QTE_DISPO" />
+                <ScalarProperty Name="LIB_ARTICLE" ColumnName="LIB_ARTICLE" />
+                <ScalarProperty Name="NO_ARTICLE" ColumnName="NO_ARTICLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clientel">
+            <EntityTypeMapping TypeName="CommercialModel.clientel">
+              <MappingFragment StoreEntitySet="clientel">
+                <ScalarProperty Name="CODE_POST_CL" ColumnName="CODE_POST_CL" />
+                <ScalarProperty Name="VILLE_CL" ColumnName="VILLE_CL" />
+                <ScalarProperty Name="ADRESSE_CL" ColumnName="ADRESSE_CL" />
+                <ScalarProperty Name="PRENOM_CL" ColumnName="PRENOM_CL" />
+                <ScalarProperty Name="NOM_CL" ColumnName="NOM_CL" />
+                <ScalarProperty Name="SOCIETE" ColumnName="SOCIETE" />
+                <ScalarProperty Name="NO_CLIENT" ColumnName="NO_CLIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="commandes">
+            <EntityTypeMapping TypeName="CommercialModel.commandes">
+              <MappingFragment StoreEntitySet="commandes">
+                <ScalarProperty Name="FACTURE" ColumnName="FACTURE" />
+                <ScalarProperty Name="DATE_CDE" ColumnName="DATE_CDE" />
+                <ScalarProperty Name="NO_CLIENT" ColumnName="NO_CLIENT" />
+                <ScalarProperty Name="NO_VENDEUR" ColumnName="NO_VENDEUR" />
+                <ScalarProperty Name="NO_COMMAND" ColumnName="NO_COMMAND" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compose">
+            <EntityTypeMapping TypeName="CommercialModel.compose">
+              <MappingFragment StoreEntitySet="compose">
+                <ScalarProperty Name="QTE_COMPOSANT" ColumnName="QTE_COMPOSANT" />
+                <ScalarProperty Name="NO_COMPOSANT" ColumnName="NO_COMPOSANT" />
+                <ScalarProperty Name="NO_COMPOSE" ColumnName="NO_COMPOSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detail_cde">
+            <EntityTypeMapping TypeName="CommercialModel.detail_cde">
+              <MappingFragment StoreEntitySet="detail_cde">
+                <ScalarProperty Name="LIVREE" ColumnName="LIVREE" />
+                <ScalarProperty Name="QTE_CDEE" ColumnName="QTE_CDEE" />
+                <ScalarProperty Name="NO_ARTICLE" ColumnName="NO_ARTICLE" />
+                <ScalarProperty Name="NO_COMMAND" ColumnName="NO_COMMAND" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="utilisateur">
+            <EntityTypeMapping TypeName="CommercialModel.utilisateur">
+              <MappingFragment StoreEntitySet="utilisateur">
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="fonction" ColumnName="fonction" />
+                <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+                <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendeur">
+            <EntityTypeMapping TypeName="CommercialModel.vendeur">
+              <MappingFragment StoreEntitySet="vendeur">
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
+                <ScalarProperty Name="SALAIRE_VEND" ColumnName="SALAIRE_VEND" />
+                <ScalarProperty Name="VILLE_VEND" ColumnName="VILLE_VEND" />
+                <ScalarProperty Name="DATE_EMBAU" ColumnName="DATE_EMBAU" />
+                <ScalarProperty Name="PRENOM_VEND" ColumnName="PRENOM_VEND" />
+                <ScalarProperty Name="NOM_VEND" ColumnName="NOM_VEND" />
+                <ScalarProperty Name="NO_VEND_CHEF_EQ" ColumnName="NO_VEND_CHEF_EQ" />
+                <ScalarProperty Name="NO_VENDEUR" ColumnName="NO_VENDEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

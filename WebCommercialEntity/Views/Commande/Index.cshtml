@@ -1,0 +1,60 @@
+﻿
+@model System.Data.DataTable
+@using System.Data;
+ 
+@{
+    ViewBag.Title = "Liste des  Commandes ";
+    Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+@if (Model != null)
+{
+    <div class="container">
+        <div class="col-md-8 col-sm-8">
+            <div class="blanc">
+                <h1>Liste des Commandes </h1>
+            </div>
+
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th> N° Commande</th>
+                        <th> Date Commande</th>
+                        <th> Nom Client </th>
+                        <th>Société</th>
+                        <th>Ville Client</th>
+                        <th>Nom vendeur</th>
+                        <th style="width:80px">Modifier</th>
+                        <th style="width:80px">Supprimer</th>
+                    </tr>
+                </thead>
+                @foreach (DataRow dataRow in Model.Rows)
+                 {
+                    <tr>
+                        @foreach (var item in dataRow.ItemArray)
+                        {
+                            <td>
+                                @item.ToString()
+                  
+                            </td>
+                        }     
+                        <td style="text-align:center;">
+                          <span>
+                            @Html.ActionLink("  ", "Modifier", "Commande", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
+                         </span>
+                          </td>
+                            <td style="text-align:center;">
+                              <span>
+                                @Html.ActionLink("  ", "Supprimer", "Client", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-remove" })
+                              </span>
+                            </td>
+                       
+                      </tr>
+
+                }
+
+            </table>
+           
+
+        </div>
+    </div>
+}

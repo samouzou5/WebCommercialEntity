@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1ff2bdffb684762857d417713dbee73" Name="Diagram1">
+        <EntityTypeShape EntityType="CommercialModel.articles" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="CommercialModel.clientel" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="CommercialModel.commandes" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="CommercialModel.compose" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="CommercialModel.detail_cde" Width="1.5" PointX="5.25" PointY="2.75" />
+        <EntityTypeShape EntityType="CommercialModel.utilisateur" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="CommercialModel.vendeur" Width="1.5" PointX="0.75" PointY="2.125" />
+        <AssociationConnector Association="CommercialModel.fk1_compose" />
+        <AssociationConnector Association="CommercialModel.fk2_compose" />
+        <AssociationConnector Association="CommercialModel.fk2_detail_cde" />
+        <AssociationConnector Association="CommercialModel.fk2_commandes" />
+        <AssociationConnector Association="CommercialModel.fk1_commandes" />
+        <AssociationConnector Association="CommercialModel.fk1_detail_cde" />
+        <AssociationConnector Association="CommercialModel.fk_login_u" />
+        <AssociationConnector Association="CommercialModel.fk1_vendeur" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CommercialModelStoreContainer" CdmEntityContainer="CommercialEntities">
+    <EntitySetMapping Name="articles">
+      <EntityTypeMapping TypeName="CommercialModel.articles">
+        <MappingFragment StoreEntitySet="articles">
+          <ScalarProperty Name="INTERROMPU" ColumnName="INTERROMPU" />
+          <ScalarProperty Name="PRIX_ART" ColumnName="PRIX_ART" />
+          <ScalarProperty Name="VILLE_ART" ColumnName="VILLE_ART" />
+          <ScalarProperty Name="QTE_DISPO" ColumnName="QTE_DISPO" />
+          <ScalarProperty Name="LIB_ARTICLE" ColumnName="LIB_ARTICLE" />
+          <ScalarProperty Name="NO_ARTICLE" ColumnName="NO_ARTICLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clientel">
+      <EntityTypeMapping TypeName="CommercialModel.clientel">
+        <MappingFragment StoreEntitySet="clientel">
+          <ScalarProperty Name="CODE_POST_CL" ColumnName="CODE_POST_CL" />
+          <ScalarProperty Name="VILLE_CL" ColumnName="VILLE_CL" />
+          <ScalarProperty Name="ADRESSE_CL" ColumnName="ADRESSE_CL" />
+          <ScalarProperty Name="PRENOM_CL" ColumnName="PRENOM_CL" />
+          <ScalarProperty Name="NOM_CL" ColumnName="NOM_CL" />
+          <ScalarProperty Name="SOCIETE" ColumnName="SOCIETE" />
+          <ScalarProperty Name="NO_CLIENT" ColumnName="NO_CLIENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commandes">
+      <EntityTypeMapping TypeName="CommercialModel.commandes">
+        <MappingFragment StoreEntitySet="commandes">
+          <ScalarProperty Name="FACTURE" ColumnName="FACTURE" />
+          <ScalarProperty Name="DATE_CDE" ColumnName="DATE_CDE" />
+          <ScalarProperty Name="NO_CLIENT" ColumnName="NO_CLIENT" />
+          <ScalarProperty Name="NO_VENDEUR" ColumnName="NO_VENDEUR" />
+          <ScalarProperty Name="NO_COMMAND" ColumnName="NO_COMMAND" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="compose">
+      <EntityTypeMapping TypeName="CommercialModel.compose">
+        <MappingFragment StoreEntitySet="compose">
+          <ScalarProperty Name="QTE_COMPOSANT" ColumnName="QTE_COMPOSANT" />
+          <ScalarProperty Name="NO_COMPOSANT" ColumnName="NO_COMPOSANT" />
+          <ScalarProperty Name="NO_COMPOSE" ColumnName="NO_COMPOSE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="detail_cde">
+      <EntityTypeMapping TypeName="CommercialModel.detail_cde">
+        <MappingFragment StoreEntitySet="detail_cde">
+          <ScalarProperty Name="LIVREE" ColumnName="LIVREE" />
+          <ScalarProperty Name="QTE_CDEE" ColumnName="QTE_CDEE" />
+          <ScalarProperty Name="NO_ARTICLE" ColumnName="NO_ARTICLE" />
+          <ScalarProperty Name="NO_COMMAND" ColumnName="NO_COMMAND" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="utilisateur">
+      <EntityTypeMapping TypeName="CommercialModel.utilisateur">
+        <MappingFragment StoreEntitySet="utilisateur">
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="fonction" ColumnName="fonction" />
+          <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+          <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendeur">
+      <EntityTypeMapping TypeName="CommercialModel.vendeur">
+        <MappingFragment StoreEntitySet="vendeur">
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
+          <ScalarProperty Name="SALAIRE_VEND" ColumnName="SALAIRE_VEND" />
+          <ScalarProperty Name="VILLE_VEND" ColumnName="VILLE_VEND" />
+          <ScalarProperty Name="DATE_EMBAU" ColumnName="DATE_EMBAU" />
+          <ScalarProperty Name="PRENOM_VEND" ColumnName="PRENOM_VEND" />
+          <ScalarProperty Name="NOM_VEND" ColumnName="NOM_VEND" />
+          <ScalarProperty Name="NO_VEND_CHEF_EQ" ColumnName="NO_VEND_CHEF_EQ" />
+          <ScalarProperty Name="NO_VENDEUR" ColumnName="NO_VENDEUR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

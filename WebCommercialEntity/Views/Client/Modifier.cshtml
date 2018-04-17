@@ -1,0 +1,81 @@
+﻿@model  WebCommercialEntity.Models.clientel
+
+@{
+    ViewBag.Title = "Modifier";
+    Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+
+<h2>Modifier un client</h2>
+
+@if (Model != null)
+{
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Client</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.NO_CLIENT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NO_CLIENT, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+                    @Html.ValidationMessageFor(model => model.NO_CLIENT, "", new { @class = "text-danger" })
+                    <input name="NO_CLIENT" type="HIDDEN" value=@(@Model.NO_CLIENT) id="NoClient" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Société</label>
+                <div class="col-md-10">
+                    <input name="SOCIETE" type="text" class="form-control" value=@(@Model.SOCIETE) id="SOCIETE" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">NomClient</label>
+                <div class="col-md-10">
+                    <input name="NOM_CL" type="text" class="form-control" value=@(@Model.NOM_CL) id="NOM_CL" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">PrénomClient</label>
+                <div class="col-md-10">
+                    <input name="PRENOM_CL" type="text" class="form-control" value=@(@Model.PRENOM_CL) id="PRENOM_CL" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Adresse client</label>
+                <div class="col-md-10">
+                    <input name="ADRESSE_CL" type="text" class="form-control" value=@(@Model.ADRESSE_CL) id="ADRESSE_CL" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Code Postal client</label>
+                <div class="col-md-10">
+                    <input name="CODE_POST_CL" type="text" class="form-control" value=@(@Model.CODE_POST_CL) id="CODE_POST_CL" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Ville client</label>
+                <div class="col-md-10">
+                    <input name="VILLE_CL" type="text" class="form-control" value=@(@Model.VILLE_CL) id="VILLE_CL" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Enregistrer" class="btn btn-primary" />
+
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+
