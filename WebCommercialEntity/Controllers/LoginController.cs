@@ -27,7 +27,7 @@ namespace WebCommercialEntity.Controllers
             utilisateur u = new utilisateur();
             try
             {
-                Service unS = Service.getInstance();
+                Service unS = Service.GetInstance();
                 u = unS.RechercheUnUtilisateur(username);
                 if(u == null)
                 {

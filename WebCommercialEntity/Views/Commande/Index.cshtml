@@ -25,6 +25,7 @@
                         <th>Nom vendeur</th>
                         <th style="width:80px">Modifier</th>
                         <th style="width:80px">Supprimer</th>
+                        <th style="width:80px">Détail de la commande</th>
                     </tr>
                 </thead>
                 @foreach (DataRow dataRow in Model.Rows)
@@ -47,6 +48,11 @@
                                 @Html.ActionLink("  ", "Supprimer", "Client", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-remove" })
                               </span>
                             </td>
+                        <td>
+                            <span>
+                                @Html.ActionLink(" ","Detail","Commande",new { id = dataRow[0]},new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-list-alt"})
+                            </span>
+                        </td>
                        
                       </tr>
 

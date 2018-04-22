@@ -18,7 +18,7 @@ namespace WebCommercialEntity.Controllers
             IEnumerable<clientel> mesClients = null;
             try
             {
-                Service unS = Service.getInstance();
+                Service unS = Service.GetInstance();
                 mesClients = unS.ListClients();
             }
             catch (MonException e)
@@ -35,7 +35,7 @@ namespace WebCommercialEntity.Controllers
         {
             try
             {
-                 unS = Service.getInstance();
+                 unS = Service.GetInstance();
                 clientel unCl = unS.RechercheUnClient(id);
                 return View(unCl);
             }
@@ -54,7 +54,7 @@ namespace WebCommercialEntity.Controllers
                 // utilisation possible de Request
                // String s= Request["SOCIETE"];
                //  String v = Request["VILLE_CL"];
-                unS = Service.getInstance();
+                unS = Service.GetInstance();
                 unS.ModifierClient(unC);
                 return View();
             }

@@ -18,7 +18,7 @@ namespace WebCommercialEntity.Controllers
             DataTable mesCommandes = null;
             try
             {
-                unS = Service.getInstance();
+                unS = Service.GetInstance();
                 mesCommandes = unS.ListClientsParVendeur();
             }
             catch (MonException e)
@@ -30,12 +30,28 @@ namespace WebCommercialEntity.Controllers
             return View(mesCommandes);
         }
 
+        //affiche le détail d'une commande sélectionnée au clic
+        public ActionResult Detail(String id)
+        {
+            DetailCde detailCde = new DetailCde();
+            try
+            {
+                unS = Service.GetInstance();
+                detailCde = unS.GetDetailCommande(id);
+                return View(detailCde);
+            }catch (MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //affiche la page de modification d'une commande avec les données associées au numéro de commande en paramètre
         public ActionResult Modifier(string id)
         {
             CommerceViewModel cvm = new CommerceViewModel();
             try
             {
-                unS = Service.getInstance();
+                unS = Service.GetInstance();
                 cvm.cs = unS.RechercheUneCommande(id);
                 cvm.lesVendeurs = unS.ListVendeurs();
                 cvm.lesClients = unS.ListClients();
@@ -48,6 +64,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
+        //Action Result appelé pour la modification d'une commande en base de données
         [HttpPost]
         public ActionResult Modifier()
         {
@@ -56,13 +73,15 @@ namespace WebCommercialEntity.Controllers
                 // utilisation possible de Request
                 // String s= Request["SOCIETE"];
                 //  String v = Request["VILLE_CL"];
+
+                //récupération des données modifiées par l'utilisateur puis mise à jour en base de données
                 commandes uneC = new commandes();
                 uneC.FACTURE = Request["optradio"];
                 uneC.NO_CLIENT = Request["liste_client"];
                 uneC.NO_COMMAND = Request["NO_COMMAND"];
                 uneC.NO_VENDEUR = Request["liste_vendeur"];
                 uneC.DATE_CDE = Convert.ToDateTime(Request["DATE_COMMANDE"]);
-                unS = Service.getInstance();
+                unS = Service.GetInstance();
                 unS.ModifierCommande(uneC);
                 return View();
             }

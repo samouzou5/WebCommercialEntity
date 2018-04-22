@@ -18,7 +18,7 @@ namespace WebCommercialEntity.Models
         /// <summary>
         /// Obtenir le singleton et le créer s'il n'existe pas
         /// </summary>
-        public static Service getInstance()
+        public static Service GetInstance()
         {
             if (Service.instance == null)
             {
@@ -269,6 +269,38 @@ namespace WebCommercialEntity.Models
                 unCommercial.SaveChanges();
             }
             catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+        }
+
+        //permet de récupérer tous les articles associés à une commande donnée
+        public DetailCde GetDetailCommande(String no_cmd)
+        {
+            Serreurs er = new Serreurs("Erreur sur le détail d'une commande",
+                 "Commande.getDetailCommande()");
+            DetailCde dc = new DetailCde();
+            commandes comm = new commandes();
+            try
+            {
+                comm = this.RechercheUneCommande(no_cmd);
+                dc.DetailCdes = (from a in unCommercial.articles
+                                  from de in unCommercial.detail_cde
+                                  where a.NO_ARTICLE == de.NO_ARTICLE
+                                 && de.NO_COMMAND == no_cmd
+                                  select new DetailCde
+                                  {
+                                      Art = a,
+                                      Qte_cdee = (int)de.QTE_CDEE,
+                                      Livree = de.LIVREE,
+                                      Total = (Double)(de.QTE_CDEE * a.PRIX_ART),
+                                  }).ToList();
+                dc.Com = comm;
+                return dc; 
+            }
+
+            catch (MonException e)
             {
                 throw new MonException(er.MessageUtilisateur(),
                     er.MessageApplication(), e.Message);
