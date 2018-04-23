@@ -76,6 +76,7 @@ namespace WebCommercialEntity.Controllers
 
                 //récupération des données modifiées par l'utilisateur puis mise à jour en base de données
                 commandes uneC = new commandes();
+                CommerceViewModel commerceView = new CommerceViewModel();
                 uneC.FACTURE = Request["optradio"];
                 uneC.NO_CLIENT = Request["liste_client"];
                 uneC.NO_COMMAND = Request["NO_COMMAND"];
@@ -83,7 +84,10 @@ namespace WebCommercialEntity.Controllers
                 uneC.DATE_CDE = Convert.ToDateTime(Request["DATE_COMMANDE"]);
                 unS = Service.GetInstance();
                 unS.ModifierCommande(uneC);
-                return View();
+                commerceView.cs = uneC;
+                commerceView.lesClients = unS.ListClients();
+                commerceView.lesVendeurs = unS.ListVendeurs();
+                return View(commerceView);
             }
             catch (MonException e)
             {
