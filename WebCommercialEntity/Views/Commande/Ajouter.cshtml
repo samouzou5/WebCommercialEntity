@@ -1,0 +1,93 @@
+﻿@model WebCommercialEntity.Models.CommerceViewModel
+@{
+    ViewBag.Title = "Ajouter";
+    Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+
+<h2>Ajouter une commande</h2>
+
+@if (Model != null)
+{
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Commande</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Numéro de la commande</label>
+                <div class="col-md-5">
+                    <input id="noCommand" name="noCommand" type="text" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Numéro vendeur</label>
+                <div class="col-md-10">
+                    <select id="liste_vendeur" name="liste_vendeur" class="form-control">
+                        @foreach (var item in Model.lesVendeurs)
+                        {
+                          <option value="@item.NO_VENDEUR" selected>Vendeur @item.NO_VENDEUR</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Numéro client</label>
+                <div class="col-md-10">
+                    <select id="liste_client" name="liste_client" class="form-control">
+                        @foreach (var item in Model.lesClients)
+                        {
+                            
+                          <option value="@item.NO_CLIENT">Client n° @item.NO_CLIENT</option>
+                            
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Date de la commande</label>
+                <div class="col-md-10">
+                    <input id="DATE_CDE" name="DATE_COMMANDE" type="text" class="form-control" value=""/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Facture</label>
+                <div class="col-md-10">
+                        <label class="radio-inline"><input type="radio" name="optradio" value="F">Oui</label>
+                        <label class="radio-inline"><input type="radio" name="optradio" value="N">Non</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Ajouter" class="btn btn-success" />
+                    <button type="button" class="btn btn-primary" onclick="@("window.location.href='" + Url.Action("Index","Commande") + "'");">Annuler</button>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#DATE_CDE').datepicker({
+                        format: 'dd/mm/yyyy',
+                        language: 'fr'
+                    });
+
+                    $('#noCommand').on('change', function () {
+                        var numCommande = $(this).val().toString();
+                        var regex = /[^0 - 9]*/;
+                        var result = regex.test(numCommande);
+                        alert(result);
+                    });
+                });
+            </script>
+        </div>
+
+    }
+}
+
+

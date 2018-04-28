@@ -164,6 +164,24 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        public List<articles> ListArticles()
+        {
+            Serreurs er = new Serreurs("Erreur sur lecture des articles.",
+                 "Articles.ListArticles()");
+            try
+            {
+                var mesArticles = (from a in unCommercial.articles
+                                   orderby a.NO_ARTICLE
+                                   select a);
+                return mesArticles.ToList<articles>();
+            }
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+        }
+
         /// <summary>
         /// Modifier un clent de la base
         /// </summary>
@@ -305,6 +323,42 @@ namespace WebCommercialEntity.Models
                 throw new MonException(er.MessageUtilisateur(),
                     er.MessageApplication(), e.Message);
             }
+        }
+
+        public void AjouterCommande(commandes c)
+        {
+            Serreurs er = new Serreurs("Erreur sur l'ajout d'une commande",
+                 "Commande.AjoutCommande()");
+            try
+            { 
+                unCommercial.commandes.Add(c);
+                unCommercial.SaveChanges();
+            }
+            catch (MonException e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+        }
+
+        public void SupprimerCommande(String no_cmd)
+        {
+            Serreurs er = new Serreurs("Erreur sur la suppression de commande.", "Commande.SupprimerCommande()");
+            commandes uneCde;
+            try
+            {
+
+                uneCde = (from c in unCommercial.commandes
+                          where c.NO_COMMAND == no_cmd
+                          select c).FirstOrDefault();
+                unCommercial.commandes.Remove(uneCde);
+                unCommercial.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new MonException(e.Message, "requête suppression commande", e.Message);
+            }
+
         }
 
 

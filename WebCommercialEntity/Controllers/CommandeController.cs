@@ -94,5 +94,61 @@ namespace WebCommercialEntity.Controllers
                 return HttpNotFound();
             }
         }
+
+        public ActionResult Ajouter(bool? error)
+        {
+            CommerceViewModel cvm = new CommerceViewModel();
+            try
+            {
+                unS = Service.GetInstance();
+                cvm.articles = unS.ListArticles();
+                cvm.lesVendeurs = unS.ListVendeurs();
+                cvm.lesClients = unS.ListClients();
+                return View(cvm);
+            }
+            catch (MonException e)
+            {
+                return HttpNotFound();
+
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult Ajouter()
+        {
+            commandes newCommande = new commandes();
+            try
+            {
+                newCommande.NO_CLIENT = Request["liste_client"];
+                newCommande.NO_VENDEUR = Request["liste_vendeur"];
+                newCommande.NO_COMMAND = Request["noCommand"];
+                newCommande.FACTURE = Request["optradio"];
+                newCommande.DATE_CDE = Convert.ToDateTime(Request["DATE_COMMANDE"]);
+                unS = Service.GetInstance();
+                unS.AjouterCommande(newCommande);
+                return View();
+            }
+            catch(MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        
+        public ActionResult Supprimer(String id)
+        {
+            try
+            {
+                unS = Service.GetInstance();
+                unS.SupprimerCommande(id);
+                TempData["success"] = "Suppression effectuée pour la commande " + id;
+                return RedirectToAction("Index", "Commande");
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        } 
     }
 }

@@ -1,13 +1,19 @@
 ﻿
 @model System.Data.DataTable
 @using System.Data;
- 
+
 @{
     ViewBag.Title = "Liste des  Commandes ";
     Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+
 }
 @if (Model != null)
 {
+
+    /*if(TempData["success"] != null)
+    {
+        <script>alert(TempData["success"]);</script>
+    }*/
     <div class="container">
         <div class="col-md-8 col-sm-8">
             <div class="blanc">
@@ -29,37 +35,49 @@
                     </tr>
                 </thead>
                 @foreach (DataRow dataRow in Model.Rows)
-                 {
+                {
                     <tr>
                         @foreach (var item in dataRow.ItemArray)
                         {
                             <td>
                                 @item.ToString()
-                  
+
                             </td>
-                        }     
+                        }
                         <td style="text-align:center;">
-                          <span>
-                            @Html.ActionLink("  ", "Modifier", "Commande", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
-                         </span>
-                          </td>
-                            <td style="text-align:center;">
-                              <span>
-                                @Html.ActionLink("  ", "Supprimer", "Client", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-remove" })
-                              </span>
-                            </td>
-                        <td>
                             <span>
-                                @Html.ActionLink(" ","Detail","Commande",new { id = dataRow[0]},new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-list-alt"})
+                                @Html.ActionLink("  ", "Modifier", "Commande", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
                             </span>
                         </td>
-                       
-                      </tr>
+                        <td style="text-align:center;">
+                            <span>
+                                @Html.ActionLink("  ", "Supprimer", "Commande", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-remove", id = "deleteCommand" + dataRow[0] })
+                            </span>
+                        </td>
+                        <td>
+                            <span>
+                                @Html.ActionLink(" ", "Detail", "Commande", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-list-alt" })
+                            </span>
+                        </td>
+
+                    </tr>
 
                 }
 
             </table>
-           
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("a[id ^=deleteCommand]").on('click', function (e) {
+                        if (confirm("Voulez-vous vraiment supprimer cette commande ?")) {
+                            console.log('Form is submitting');
+                        } else {
+                            alert('Suppression annulée');
+                            e.preventDefault();
+                        }
+                    });
+                });
+            </script>
 
         </div>
     </div>

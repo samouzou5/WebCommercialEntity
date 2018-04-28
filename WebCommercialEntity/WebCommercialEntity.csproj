@@ -265,6 +265,7 @@
     <Content Include="Views\Login\Success.cshtml" />
     <Content Include="Views\Commande\Modifier.cshtml" />
     <Content Include="Views\Commande\Detail.cshtml" />
+    <Content Include="Views\Commande\Ajouter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

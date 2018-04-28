@@ -11,5 +11,7 @@ namespace WebCommercialEntity.Models
         public commandes cs { get; set; }
         public IEnumerable<clientel> lesClients { get; set; }
 
+        public List<articles> articles { get; set; }
+
     }
 }
