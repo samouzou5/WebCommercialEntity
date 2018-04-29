@@ -356,11 +356,64 @@ namespace WebCommercialEntity.Models
             }
             catch (Exception e)
             {
-                throw new MonException(e.Message, "requête suppression commande", e.Message);
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
             }
 
         }
 
+        public Service ModifierPrixArticles(String value)
+        {
+            Serreurs er = new Serreurs("Erreur sur l'augmentation du prix des articles", "Article.ModifierPrixArticles()");
+            double zevalue = double.Parse(value);
+            try
+            {
+                //appel de la procedure pour augmenter les prix
+                unCommercial.articles_augm_prix(zevalue);
+            }
 
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+
+            return this;
+        }
+
+        public DataTable GetLesArticles(String tri = "NO_ARTICLE", String ordre = "ASC")
+        {
+
+            DataTable dt = new DataTable();
+            Serreurs er = new Serreurs("Erreur sur lecture du client.",
+                 "Clientel.LectureNoClient()");
+            try
+
+            {
+                dt.Columns.Add("NO_ARTICLE", typeof(String));
+                dt.Columns.Add("LIB_ARTICLE", typeof(String));
+                dt.Columns.Add("PRIX_ART", typeof(Decimal));
+                dt.Columns.Add("QTE_DISPO", typeof(Int32));
+                dt.Columns.Add("INTERROMPU", typeof(String));
+                dt.Columns.Add("VILLE_ART", typeof(String));
+
+
+                var req = from a in unCommercial.articles
+                         orderby tri, ordre
+                         select a;
+                foreach (var res in req)
+                {
+
+                    dt.Rows.Add(res.NO_ARTICLE, res.LIB_ARTICLE, res.PRIX_ART, res.QTE_DISPO, res.INTERROMPU, res.VILLE_ART);
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+
+        }
     }
 }

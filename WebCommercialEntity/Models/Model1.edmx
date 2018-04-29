@@ -177,6 +177,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="articles_augm_prix" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="commercial">
+          <Parameter Name="augmente" Type="double" Mode="In" />
+        </Function>
         <EntityContainer Name="CommercialModelStoreContainer">
           <EntitySet Name="articles" EntityType="Self.articles" Schema="commercial" store:Type="Tables" />
           <EntitySet Name="clientel" EntityType="Self.clientel" Schema="commercial" store:Type="Tables" />
@@ -262,6 +265,9 @@
             <End Role="vendeur" EntitySet="vendeur" />
             <End Role="vendeur1" EntitySet="vendeur" />
           </AssociationSet>
+          <FunctionImport Name="articles_augm_prix">
+            <Parameter Name="augmente" Mode="In" Type="Double" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="articles">
           <Key>
@@ -538,6 +544,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="articles_augm_prix" FunctionName="CommercialModel.Store.articles_augm_prix" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

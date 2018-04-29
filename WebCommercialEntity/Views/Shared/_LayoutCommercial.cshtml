@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/articleCommande.js")
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -51,6 +52,10 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="/Commande">Liste des commandes</a></li>
                             <li><a href="/Commande/Ajouter">Ajouter une nouvelle commande</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Article</li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/Article/Index">Liste des articles</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -63,7 +68,7 @@
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Produits</li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Augmenter Prix</a></li>
+                            <li><a href="/Article/AugmenterArticle">Augmenter Prix</a></li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>

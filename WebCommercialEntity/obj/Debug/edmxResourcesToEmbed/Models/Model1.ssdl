@@ -172,6 +172,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="articles_augm_prix" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="commercial">
+    <Parameter Name="augmente" Type="double" Mode="In" />
+  </Function>
   <EntityContainer Name="CommercialModelStoreContainer">
     <EntitySet Name="articles" EntityType="Self.articles" Schema="commercial" store:Type="Tables" />
     <EntitySet Name="clientel" EntityType="Self.clientel" Schema="commercial" store:Type="Tables" />

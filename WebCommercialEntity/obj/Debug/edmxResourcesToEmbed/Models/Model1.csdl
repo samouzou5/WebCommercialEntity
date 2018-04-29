@@ -40,6 +40,9 @@
       <End Role="vendeur" EntitySet="vendeur" />
       <End Role="vendeur1" EntitySet="vendeur" />
     </AssociationSet>
+    <FunctionImport Name="articles_augm_prix">
+      <Parameter Name="augmente" Mode="In" Type="Double" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="articles">
     <Key>

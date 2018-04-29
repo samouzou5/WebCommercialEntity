@@ -152,6 +152,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -219,6 +220,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\articleCommande.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -266,6 +268,9 @@
     <Content Include="Views\Commande\Modifier.cshtml" />
     <Content Include="Views\Commande\Detail.cshtml" />
     <Content Include="Views\Commande\Ajouter.cshtml" />
+    <Content Include="Views\Article\AugmenterArticle.cshtml" />
+    <Content Include="Views\Article\Augmenter.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

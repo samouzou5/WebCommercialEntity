@@ -82,5 +82,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="articles_augm_prix" FunctionName="CommercialModel.Store.articles_augm_prix" />
   </EntityContainerMapping>
 </Mapping>

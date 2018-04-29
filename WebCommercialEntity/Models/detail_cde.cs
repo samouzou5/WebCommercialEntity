@@ -18,8 +18,6 @@ namespace WebCommercialEntity.Models
         public string NO_ARTICLE { get; set; }
         public Nullable<int> QTE_CDEE { get; set; }
         public string LIVREE { get; set; }
-
-        public Double TOTAL { get; set; }
     
         public virtual articles articles { get; set; }
         public virtual commandes commandes { get; set; }

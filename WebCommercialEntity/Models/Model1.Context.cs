@@ -12,6 +12,9 @@ namespace WebCommercialEntity.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class CommercialEntities : DbContext
     {
@@ -32,5 +35,14 @@ namespace WebCommercialEntity.Models
         public DbSet<detail_cde> detail_cde { get; set; }
         public DbSet<utilisateur> utilisateur { get; set; }
         public DbSet<vendeur> vendeur { get; set; }
+    
+        public virtual int articles_augm_prix(Nullable<double> augmente)
+        {
+            var augmenteParameter = augmente.HasValue ?
+                new ObjectParameter("augmente", augmente) :
+                new ObjectParameter("augmente", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("articles_augm_prix", augmenteParameter);
+        }
     }
 }
