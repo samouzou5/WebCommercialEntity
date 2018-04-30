@@ -21,6 +21,7 @@
                 <label class="control-label col-md-2">Numéro de la commande</label>
                 <div class="col-md-5">
                     <input id="noCommand" name="noCommand" type="text" class="form-control" />
+                    <div id="affichage"></div>
                 </div>
             </div>
 
@@ -66,25 +67,10 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Ajouter" class="btn btn-success" />
+                    <input type="submit" id="addCommand" value="Ajouter" class="btn btn-success" />
                     <button type="button" class="btn btn-primary" onclick="@("window.location.href='" + Url.Action("Index","Commande") + "'");">Annuler</button>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#DATE_CDE').datepicker({
-                        format: 'dd/mm/yyyy',
-                        language: 'fr'
-                    });
-
-                    $('#noCommand').on('change', function () {
-                        var numCommande = $(this).val().toString();
-                        var regex = /[^0 - 9]*/;
-                        var result = regex.test(numCommande);
-                        alert(result);
-                    });
-                });
-            </script>
         </div>
 
     }

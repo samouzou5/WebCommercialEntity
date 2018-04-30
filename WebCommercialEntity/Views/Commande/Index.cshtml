@@ -10,10 +10,10 @@
 @if (Model != null)
 {
 
-    /*if(TempData["success"] != null)
+    if(TempData["success"] != null)
     {
-        <script>alert(TempData["success"]);</script>
-    }*/
+        @Html.Raw("<script type='text/javascript'>alert(\"" + TempData["success"] + "\");</script>");
+    }
     <div class="container">
         <div class="col-md-8 col-sm-8">
             <div class="blanc">
@@ -65,20 +65,6 @@
                 }
 
             </table>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $("a[id ^=deleteCommand]").on('click', function (e) {
-                        if (confirm("Voulez-vous vraiment supprimer cette commande ?")) {
-                            console.log('Form is submitting');
-                        } else {
-                            alert('Suppression annulée');
-                            e.preventDefault();
-                        }
-                    });
-                });
-            </script>
-
         </div>
     </div>
 }

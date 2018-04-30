@@ -69,7 +69,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Date de la commande</label>
                 <div class="col-md-10">
-                    <input id="DATE_CDE" name="DATE_COMMANDE" type="text" class="form-control" value=@(@Model.cs.DATE_CDE.ToString()) />
+                    <input id="DATE_CMDE" name="DATE_COMMANDE" type="text" class="form-control" value=@(@Model.cs.DATE_CDE.ToString()) />
                 </div>
             </div>
             <div class="form-group">
@@ -94,14 +94,6 @@
                     <button type="button" class="btn btn-primary" onclick="@("window.location.href='" + Url.Action("Index","Commande") + "'");">Annuler</button>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#DATE_CDE').datepicker({
-                        format: 'dd/mm/yyyy',
-                        language:'fr'
-                    });
-                });
-            </script>
         </div>
 
     }

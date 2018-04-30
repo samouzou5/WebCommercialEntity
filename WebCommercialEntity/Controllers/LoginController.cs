@@ -33,11 +33,12 @@ namespace WebCommercialEntity.Controllers
                 {
                     return RedirectToAction("Index", new { @error = true });
                 }
-                if(u.motDePasse == password)
+                if(u.motDePasse == password && u.fonction.Equals("Admin"))
                 {
                     Session["login"] = username;
                     Session["nom"] = u.nom;
                     Session["prenom"] = u.prenom;
+                    Session["fonction"] = u.fonction;
                     return RedirectToAction("Index","Commande");
                 }
                 else
