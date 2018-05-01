@@ -1,0 +1,29 @@
+﻿
+@model System.Data.DataTable
+@using System.Data;
+
+<table class="table table-bordered table-striped table-responsive">
+    <thead>
+        <tr>
+            <th> N° Article</th>
+            <th> Libellé article</th>
+            <th> Prix article </th>
+            <th>Quantité disponible</th>
+            <th>Statut</th>
+            <th>Ville article</th>
+        </tr>
+    </thead>
+    @foreach (DataRow dataRow in Model.Rows)
+    {
+        <tr>
+            @foreach (var item in dataRow.ItemArray)
+            {
+                <td>
+                    @item.ToString()
+                </td>
+            }
+        </tr>
+
+    }
+
+</table>

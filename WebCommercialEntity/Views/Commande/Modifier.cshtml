@@ -7,7 +7,7 @@
 
 <h2>Modifier une commande</h2>
 
-@if (Model != null)
+@if (Model != null && Session["login"] != null)
 {
 
     using (Html.BeginForm())
@@ -97,6 +97,9 @@
         </div>
 
     }
+}
+else{
+    @Html.Partial("_AccesInterdit");
 }
 
 

@@ -370,6 +370,8 @@ namespace WebCommercialEntity.Models
             {
                 //appel de la procedure pour augmenter les prix
                 unCommercial.articles_augm_prix(zevalue);
+                unCommercial.SaveChanges();
+                unCommercial.Refresh();
             }
 
             catch (Exception e)

@@ -14,6 +14,8 @@
     <title>Detail</title>
 </head>
 <body>
+    @if (Session["login"] != null)
+    {
     <br/>
     <h5><b>Commande n° @Model.Com.NO_COMMAND </b></h5>
     <h5><b>Passée le : @Model.Com.DATE_CDE </b></h5>
@@ -46,8 +48,12 @@
                 </td>
                 @{ total += model.Total;}
             </tr>
-        }
+                    }
     </table>
     <h5><b>Total de la commande : @total euros </b></h5>
-</body>
+                    }
+                    else {
+                        @Html.Partial("_AccesInterdit");
+                        }
+                    }</body>
 </html>

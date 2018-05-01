@@ -7,10 +7,10 @@
     Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
 
 }
-@if (Model != null)
+@if (Model != null && Session["login"] != null)
 {
 
-    if(TempData["success"] != null)
+    if (TempData["success"] != null)
     {
         @Html.Raw("<script type='text/javascript'>alert(\"" + TempData["success"] + "\");</script>");
     }
@@ -67,4 +67,8 @@
             </table>
         </div>
     </div>
+}
+else
+{
+    @Html.Partial("_AccesInterdit");
 }

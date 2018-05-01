@@ -10,6 +10,7 @@
 namespace WebCommercialEntity.Models
 {
     using System;
+    using System.Data;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Objects;
@@ -35,7 +36,7 @@ namespace WebCommercialEntity.Models
         public DbSet<detail_cde> detail_cde { get; set; }
         public DbSet<utilisateur> utilisateur { get; set; }
         public DbSet<vendeur> vendeur { get; set; }
-    
+        //méthode générée pour appeler la procédure d'augmentation des prix
         public virtual int articles_augm_prix(Nullable<double> augmente)
         {
             var augmenteParameter = augmente.HasValue ?
@@ -44,5 +45,21 @@ namespace WebCommercialEntity.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("articles_augm_prix", augmenteParameter);
         }
+
+        //Rafrachit la base de données suite à la mise à jour de la procédure stockée
+        public void Refresh()
+        {
+            var context = ((IObjectContextAdapter)this).ObjectContext;
+            var refreshableObjects = (from entry in context.ObjectStateManager.GetObjectStateEntries(
+                                                        EntityState.Added
+                                                       | EntityState.Deleted
+                                                       | EntityState.Modified
+                                                       | EntityState.Unchanged)
+                                      where entry.EntityKey != null
+                                      select entry.Entity).ToList();
+
+            context.Refresh(RefreshMode.StoreWins, refreshableObjects);
+        }
+
     }
 }

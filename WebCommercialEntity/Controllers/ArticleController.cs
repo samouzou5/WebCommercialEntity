@@ -27,6 +27,39 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
+        public ActionResult ListeArticlePartial()
+        {
+            try
+            {
+                unS = Service.GetInstance();
+                System.Data.DataTable lesArticles = unS.GetLesArticles();
+
+                return PartialView(lesArticles);
+            }
+            catch (Exception e)
+            {
+
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ListeArticlePartial(string value)
+        {
+            try
+            {
+                string valeur = Request["pourcentage"];
+                unS = Service.GetInstance();
+                unS.ModifierPrixArticles(value);
+                return Json(new { valeur = value });
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+
+        }
+
         public ActionResult AugmenterArticle()
         {
             try
@@ -47,7 +80,7 @@ namespace WebCommercialEntity.Controllers
                 string valeur = Request["pourcentage"];
                 unS = Service.GetInstance();
                 unS.ModifierPrixArticles(valeur);
-                return RedirectToAction("Index","Commande");
+                return PartialView();
             }
             catch (Exception)
             {

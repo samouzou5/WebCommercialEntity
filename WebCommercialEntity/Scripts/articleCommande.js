@@ -1,7 +1,7 @@
 ﻿    $(document).ready(function () {
         $('#augmentation').on('click', function (e) {
-            var valeur = $(this).val();
-            if (isNan(parseInt(valeur)) || valeur.length === 0) {
+            var valeur = $("#pourcentage").val();
+            if (isNaN(parseInt(valeur)) || valeur.length === 0) {
                 alert("Veuillez saisir une valeur valide");
                 e.preventDefault();
 
@@ -47,6 +47,5 @@
                 e.preventDefault();
             }
 
-        })
-
+        });
     });
