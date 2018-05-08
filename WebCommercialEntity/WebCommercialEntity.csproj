@@ -273,6 +273,7 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\ListeArticlePartial.cshtml" />
     <Content Include="Views\Shared\_AccesInterdit.cshtml" />
+    <Content Include="Views\Commande\Rechercher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

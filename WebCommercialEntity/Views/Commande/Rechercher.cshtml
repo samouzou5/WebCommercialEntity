@@ -2,27 +2,39 @@
 @using System.Data;
 
 @{
-    ViewBag.Title = "Liste des  Commandes ";
+    ViewBag.Title = "Rechercher des commandes entre périodes";
     Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
-
 }
-@if (Model != null && Session["login"] != null)
-{
 
-    if (TempData["success"] != null)
-    {
-        @Html.Raw("<script type='text/javascript'>alert(\"" + TempData["success"] + "\");</script>");
-    }
+@if (Session["login"] != null)
+{
     <div class="container">
         <div class="col-md-11 col-sm-11">
             <div class="blanc">
                 <h1>Liste des Commandes </h1>
             </div>
-            <div>
-                <a href="/Commande/Rechercher" class="btn btn-info">Recherche de commandes dans une période donnée</a>
+            <div class="row">
+                <form action="/Commande/Rechercher" id="formRecherche" method="post">
+                    <div class="col-md-4">
+                        <label>
+                            Recherche de commandes du:
+                            <input type="text" class="form-control" value="@(TempData["dateDeb"] != null? TempData["dateDeb"]:"")" id="date_debut" name="date_debut" style="width:150px;" />
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>
+                            au :
+                            <input type="text" class="form-control" value="@(TempData["dateFin"] != null? TempData["dateFin"]:"")" id="date_fin" name="date_fin" style="width:150px;" />
+                        </label>
+                        <input type="submit" id="rechercheCommande" name="rechercheCommande" class="btn btn-info" value="OK" />
+                    </div>
+
+                </form>
             </div>
-            <br />
-            <table class="table table-bordered table-striped table-responsive">
+            @if((Boolean)TempData["recherche"] && !(Boolean)TempData["rechercheVide"])
+            {
+                if(Model.Rows.Count > 0) { 
+            <table id="resultRecherche" class="table table-bordered table-striped table-responsive">
                 <thead>
                     <tr>
                         <th> N° Commande</th>
@@ -37,10 +49,10 @@
                     </tr>
                 </thead>
                 @foreach (DataRow dataRow in Model.Rows)
-        {
+    {
             <tr>
                 @foreach (var item in dataRow.ItemArray)
-        {
+    {
             <td>
                 @item.ToString()
 
@@ -63,10 +75,13 @@
                 </td>
 
             </tr>
-
-}
-
+                }
             </table>
+                }
+            }else if((Boolean)TempData["recherche"] && (Boolean)TempData["rechercheVide"])
+                {
+                    @Html.Raw("<p>Aucun résultat pour cette recherche</p>")
+                }
         </div>
     </div>
 }

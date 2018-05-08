@@ -27,6 +27,17 @@
             language: 'fr'
         });
 
+        $('#date_debut').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'fr'
+        });
+
+        $('#date_fin').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'fr'
+        });
+
+
         $('#noCommand').on('change', function () {
             var numCommande = $(this).val().toString();
             var regex = /^[0-9]{6}$/;
@@ -47,5 +58,19 @@
                 e.preventDefault();
             }
 
+        });
+
+        $("#rechercheCommande").on('click', function (e) {
+            var ddeb = $("#date_debut").val();
+            var dfin = $("#date_fin").val();
+            var dated = new Date(ddeb);
+            var datef = new Date(dfin);
+            if (ddeb > dfin) {
+                alert("La date de début ne peut être supérieure à la date de fin");
+                e.preventDefault();
+            } else if ( !ddeb || !dfin || ddeb.length === 0 || dfin.length === 0) {
+                alert("La date n'est pas correctement formatée");
+                e.preventDefault();
+            }
         });
     });

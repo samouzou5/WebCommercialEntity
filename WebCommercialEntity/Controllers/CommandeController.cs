@@ -149,6 +149,39 @@ namespace WebCommercialEntity.Controllers
             {
                 return HttpNotFound();
             }
-        } 
+        }
+        
+        [HttpPost]
+        public ActionResult Rechercher(String date_debut,String date_fin)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                unS = Service.GetInstance();
+                dt = unS.RechercheCommandesSurPeriode(date_debut, date_fin);
+                return Rechercher(dt,date_debut,date_fin);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        public ActionResult Rechercher(DataTable dt,String ddeb, String dfin)
+        {
+            if (dt.Rows.Count == 0)
+            {
+                TempData["rechercheVide"] = true;
+                TempData["recherche"] = true;
+            }
+            else
+            {
+                TempData["rechercheVide"] = false;
+                TempData["recherche"] = true;
+            }
+            TempData["dateDeb"] = ddeb;
+            TempData["dateFin"] = dfin;
+            return View(dt);
+        }
     }
 }

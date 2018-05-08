@@ -164,6 +164,51 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        public DataTable RechercheCommandesSurPeriode(string date_debut, string date_fin)
+        {
+
+            DataTable dt = new DataTable();
+            Serreurs er = new Serreurs("Erreur sur la recherche de commandes", "Commande.RechercheCommandesSurPeriode");
+            DateTime datetime_debut;
+            DateTime datetime_fin;
+            try
+            {
+                datetime_debut = Convert.ToDateTime(date_debut);
+                datetime_fin = Convert.ToDateTime(date_fin);
+
+            }catch(Exception e)
+            {
+                throw new Exception("Erreur dans la conversion des dates");
+            }
+            try
+            {
+                dt.Columns.Add("NO_COMMAND", typeof(String));
+                dt.Columns.Add("DATE_CDE", typeof(DateTime));
+                dt.Columns.Add("NOM_CL", typeof(String));
+                dt.Columns.Add("SOCIETE", typeof(String));
+                dt.Columns.Add("VILLE_CL", typeof(String));
+                dt.Columns.Add("NOM_VEND", typeof(String));
+
+
+                var req = from c in unCommercial.commandes.Where(d => d.DATE_CDE >= datetime_debut && d.DATE_CDE <= datetime_fin)
+                          join cl in unCommercial.clientel on c.NO_CLIENT equals cl.NO_CLIENT
+                          join ve in unCommercial.vendeur on c.NO_VENDEUR equals ve.NO_VENDEUR
+                          select new { c.NO_COMMAND, c.DATE_CDE, cl.NOM_CL, cl.SOCIETE, cl.VILLE_CL, ve.NOM_VEND };
+                foreach (var res in req)
+                {
+
+                    dt.Rows.Add(res.NO_COMMAND, res.DATE_CDE, res.NOM_CL, res.SOCIETE, res.VILLE_CL, res.NOM_VEND);
+                }
+                return dt;
+
+            }
+            catch(Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                   er.MessageApplication(), e.Message);
+            }
+        }
+
         public List<articles> ListArticles()
         {
             Serreurs er = new Serreurs("Erreur sur lecture des articles.",
