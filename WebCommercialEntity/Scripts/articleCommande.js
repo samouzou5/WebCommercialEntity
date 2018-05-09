@@ -65,7 +65,7 @@
             var dfin = $("#date_fin").val();
             var dated = new Date(ddeb);
             var datef = new Date(dfin);
-            if (ddeb > dfin) {
+            if (dated > datef) {
                 alert("La date de début ne peut être supérieure à la date de fin");
                 e.preventDefault();
             } else if ( !ddeb || !dfin || ddeb.length === 0 || dfin.length === 0) {

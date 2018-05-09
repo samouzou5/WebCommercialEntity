@@ -169,18 +169,25 @@ namespace WebCommercialEntity.Controllers
 
         public ActionResult Rechercher(DataTable dt,String ddeb, String dfin)
         {
+            if(ddeb != null && dfin != null) { 
             if (dt.Rows.Count == 0)
             {
                 TempData["rechercheVide"] = true;
                 TempData["recherche"] = true;
             }
-            else
+            else if (dt.Rows.Count > 0)
             {
                 TempData["rechercheVide"] = false;
                 TempData["recherche"] = true;
             }
             TempData["dateDeb"] = ddeb;
             TempData["dateFin"] = dfin;
+            }
+            else
+            {
+                TempData["rechercheVide"] = false;
+                TempData["recherche"] = false;
+            }
             return View(dt);
         }
     }
