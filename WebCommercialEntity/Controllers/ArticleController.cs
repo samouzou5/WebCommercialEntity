@@ -10,7 +10,7 @@ namespace WebCommercialEntity.Controllers
     public class ArticleController : Controller
     {
         private Service unS;
-        // GET: Article
+        // récupère la liste des articles
         public ActionResult Index()
         {
             try
@@ -27,6 +27,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
+        //vue partielle retournant les listes des articles en vue de la mise à jour des prix
         public ActionResult ListeArticlePartial()
         {
             try
@@ -43,6 +44,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
+        //méthode appelée lors de la mise à jour des prix via requête Ajax
         [HttpPost]
         public ActionResult ListeArticlePartial(string value)
         {
@@ -60,6 +62,7 @@ namespace WebCommercialEntity.Controllers
 
         }
 
+        //Affiche la vue permettant d'augmenter le prix des articles via un pourcentage
         public ActionResult AugmenterArticle()
         {
             try
@@ -72,20 +75,6 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult Augmenter()
-        {
-            try
-            {
-                string valeur = Request["pourcentage"];
-                unS = Service.GetInstance();
-                unS.ModifierPrixArticles(valeur);
-                return PartialView();
-            }
-            catch (Exception)
-            {
-                return HttpNotFound();
-            }
-        }
+        
     }
 }

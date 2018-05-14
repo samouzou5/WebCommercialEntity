@@ -12,7 +12,7 @@ namespace WebCommercialEntity.Controllers
     {
         private Service unS;
         // GET: Commande
-
+        //méthode affichant la liste des commandes effectuées
         public ActionResult Index()
         {
             DataTable mesCommandes = null;
@@ -64,7 +64,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
-        //Action Result appelé pour la modification d'une commande en base de données
+        //Action Result appelée pour la modification d'une commande en base de données
         [HttpPost]
         public ActionResult Modifier()
         {
@@ -95,6 +95,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
+        //Affiche la page contenant le formulaire pour ajouter une commande
         public ActionResult Ajouter(bool? error)
         {
             CommerceViewModel cvm = new CommerceViewModel();
@@ -108,12 +109,13 @@ namespace WebCommercialEntity.Controllers
             }
             catch (MonException e)
             {
+                error = true;
                 return HttpNotFound();
 
             }
         }
 
-
+        //méthode qui permet d'ajouter une commande en récupérant les données du formulaire
         [HttpPost]
         public ActionResult Ajouter()
         {
@@ -135,7 +137,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
-        
+        //méthode qui permet la suppression d'une commande avec l'id commande en paramètre
         public ActionResult Supprimer(String id)
         {
             try
@@ -151,6 +153,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
         
+        //méthode qui va traiter les données lorsque l'url /Commande/Rechercher est appelée (après envoi du formulaire)
         [HttpPost]
         public ActionResult Rechercher(String date_debut,String date_fin)
         {
@@ -167,6 +170,7 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
+        //permet de rechercher des commandes situées entre 2 dates (ddeb : date début et dfin : date fin)
         public ActionResult Rechercher(DataTable dt,String ddeb, String dfin)
         {
             if(ddeb != null && dfin != null) { 

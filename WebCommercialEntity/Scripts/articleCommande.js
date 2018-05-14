@@ -61,15 +61,15 @@
         });
 
         $("#rechercheCommande").on('click', function (e) {
-            var ddeb = $("#date_debut").val();
-            var dfin = $("#date_fin").val();
-            var dated = new Date(ddeb);
-            var datef = new Date(dfin);
-            if (dated > datef) {
+            var ddeb = $("#date_debut").datepicker("getDate");
+            var dfin = $("#date_fin").datepicker("getDate");
+            var diff = ddeb - dfin
+            var days = diff / 1000 / 60 / 60 / 24;
+            if (diff < 0) {
                 alert("La date de début ne peut être supérieure à la date de fin");
                 e.preventDefault();
             } else if ( !ddeb || !dfin || ddeb.length === 0 || dfin.length === 0) {
-                alert("La date n'est pas correctement formatée");
+                alert("La date n'est pas correctement formatée ou vide");
                 e.preventDefault();
             }
         });
