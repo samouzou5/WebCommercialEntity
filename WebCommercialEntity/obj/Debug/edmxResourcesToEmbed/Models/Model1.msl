@@ -70,7 +70,6 @@
     <EntitySetMapping Name="vendeur">
       <EntityTypeMapping TypeName="CommercialModel.vendeur">
         <MappingFragment StoreEntitySet="vendeur">
-          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
           <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
           <ScalarProperty Name="SALAIRE_VEND" ColumnName="SALAIRE_VEND" />
           <ScalarProperty Name="VILLE_VEND" ColumnName="VILLE_VEND" />

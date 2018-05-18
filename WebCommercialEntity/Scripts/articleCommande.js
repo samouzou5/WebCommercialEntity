@@ -63,7 +63,7 @@
         $("#rechercheCommande").on('click', function (e) {
             var ddeb = $("#date_debut").datepicker("getDate");
             var dfin = $("#date_fin").datepicker("getDate");
-            var diff = ddeb - dfin
+            var diff = dfin - ddeb
             var days = diff / 1000 / 60 / 60 / 24;
             if (diff < 0) {
                 alert("La date de début ne peut être supérieure à la date de fin");

@@ -28,7 +28,6 @@ namespace WebCommercialEntity.Models
         public string VILLE_VEND { get; set; }
         public decimal SALAIRE_VEND { get; set; }
         public decimal COMMISSION { get; set; }
-        public string PASSWORD { get; set; }
     
         public virtual ICollection<commandes> commandes { get; set; }
         public virtual utilisateur utilisateur { get; set; }

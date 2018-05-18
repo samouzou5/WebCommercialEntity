@@ -63,9 +63,9 @@
           </Key>
           <Property Name="idLogin" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="motDePasse" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="fonction" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fonction" Type="varchar" MaxLength="50" />
+          <Property Name="nom" Type="varchar" MaxLength="50" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="vendeur">
           <Key>
@@ -79,9 +79,8 @@
           <Property Name="VILLE_VEND" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="SALAIRE_VEND" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="COMMISSION" Type="decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="PASSWORD" Type="varchar" MaxLength="30" />
         </EntityType>
-        <Association Name="fk_login_u">
+        <Association Name="fk_login_user">
           <End Role="vendeur" Type="Self.vendeur" Multiplicity="1" />
           <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -188,7 +187,7 @@
           <EntitySet Name="detail_cde" EntityType="Self.detail_cde" Schema="commercial" store:Type="Tables" />
           <EntitySet Name="utilisateur" EntityType="Self.utilisateur" Schema="commercial" store:Type="Tables" />
           <EntitySet Name="vendeur" EntityType="Self.vendeur" Schema="commercial" store:Type="Tables" />
-          <AssociationSet Name="fk_login_u" Association="Self.fk_login_u">
+          <AssociationSet Name="fk_login_user" Association="Self.fk_login_user">
             <End Role="vendeur" EntitySet="vendeur" />
             <End Role="utilisateur" EntitySet="utilisateur" />
           </AssociationSet>
@@ -266,7 +265,7 @@
             <End Role="vendeur1" EntitySet="vendeur" />
           </AssociationSet>
           <FunctionImport Name="articles_augm_prix">
-            <Parameter Name="augmente" Mode="In" Type="Double" />
+          <Parameter Name="augmente" Mode="In" Type="Double" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="articles">
@@ -355,7 +354,6 @@
           <Property Name="VILLE_VEND" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="SALAIRE_VEND" Type="Decimal" Nullable="false" />
           <Property Name="COMMISSION" Type="Decimal" Nullable="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="commandes" Relationship="CommercialModel.fk1_commandes" FromRole="vendeur" ToRole="commandes" />
           <NavigationProperty Name="utilisateur" Relationship="CommercialModel.fk_login_u" FromRole="vendeur" ToRole="utilisateur" />
           <NavigationProperty Name="vendeur1" Relationship="CommercialModel.fk1_vendeur" FromRole="vendeur" ToRole="vendeur1" />
@@ -532,7 +530,6 @@
           <EntitySetMapping Name="vendeur">
             <EntityTypeMapping TypeName="CommercialModel.vendeur">
               <MappingFragment StoreEntitySet="vendeur">
-                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
                 <ScalarProperty Name="SALAIRE_VEND" ColumnName="SALAIRE_VEND" />
                 <ScalarProperty Name="VILLE_VEND" ColumnName="VILLE_VEND" />

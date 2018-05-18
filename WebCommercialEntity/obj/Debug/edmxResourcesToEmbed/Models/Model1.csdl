@@ -130,7 +130,6 @@
     <Property Name="VILLE_VEND" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="SALAIRE_VEND" Type="Decimal" Nullable="false" />
     <Property Name="COMMISSION" Type="Decimal" Nullable="false" />
-    <Property Name="PASSWORD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="commandes" Relationship="CommercialModel.fk1_commandes" FromRole="vendeur" ToRole="commandes" />
     <NavigationProperty Name="utilisateur" Relationship="CommercialModel.fk_login_u" FromRole="vendeur" ToRole="utilisateur" />
     <NavigationProperty Name="vendeur1" Relationship="CommercialModel.fk1_vendeur" FromRole="vendeur" ToRole="vendeur1" />

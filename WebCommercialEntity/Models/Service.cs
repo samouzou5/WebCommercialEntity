@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 using System.Linq;
 using System.Web;
 using WebCommercialEntity.Models.MesExceptions;
@@ -416,7 +418,17 @@ namespace WebCommercialEntity.Models
                 //appel de la procedure pour augmenter les prix
                 unCommercial.articles_augm_prix(zevalue);
                 unCommercial.SaveChanges();
-                unCommercial.Refresh();
+                var objectContext = ((IObjectContextAdapter)unCommercial).ObjectContext;
+                var refreshableObjects = (from entry in objectContext.ObjectStateManager.GetObjectStateEntries(
+                                                        EntityState.Added
+                                                       | EntityState.Deleted
+                                                       | EntityState.Modified
+                                                       | EntityState.Unchanged)
+                                          where entry.EntityKey != null
+                                          select entry.Entity).ToList();
+
+                objectContext.Refresh(RefreshMode.StoreWins, refreshableObjects); ;
+
             }
 
             catch (Exception e)
