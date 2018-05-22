@@ -1,0 +1,32 @@
+﻿@model WebCommercialEntity.Models.vendeur
+@{
+    ViewBag.Title = "Infos Vendeur Connecté";
+    Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+
+@if (Model != null && Session["login"] != null)
+{
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Vendeur</h4>
+            <label>Identifiant vendeur : </label><p>@Model.NO_VENDEUR</p>
+            <label>Nom vendeur: </label><p>@Model.NOM_VEND</p>
+            <label>Prénom vendeur :</label><p>@Model.PRENOM_VEND</p>
+            <label>Salaire vendeur :</label><p>@Model.SALAIRE_VEND</p>
+            <label>Commission : </label><p>@Model.COMMISSION</p>
+            <label>Date d'embauche :</label><p>@Model.DATE_EMBAU</p>
+            <label>Ville vendeur : </label><p>@Model.VILLE_VEND</p>
+            
+        </div>
+            
+
+    }
+}
+else
+{
+    @Html.Partial("_AccesInterdit");
+}

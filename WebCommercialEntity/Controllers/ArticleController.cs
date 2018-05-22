@@ -46,11 +46,10 @@ namespace WebCommercialEntity.Controllers
 
         //méthode appelée lors de la mise à jour des prix via requête Ajax
         [HttpPost]
-        public ActionResult ListeArticlePartial(string value)
+        public ActionResult ListeArticlePartial(string value = "1")
         {
             try
             {
-                string valeur = Request["pourcentage"];
                 unS = Service.GetInstance();
                 unS.ModifierPrixArticles(value);
                 return Json(new { valeur = value });

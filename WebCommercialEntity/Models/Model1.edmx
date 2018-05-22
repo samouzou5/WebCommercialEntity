@@ -63,9 +63,9 @@
           </Key>
           <Property Name="idLogin" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="motDePasse" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="fonction" Type="varchar" MaxLength="50" />
-          <Property Name="nom" Type="varchar" MaxLength="50" />
-          <Property Name="prenom" Type="varchar" MaxLength="50" />
+          <Property Name="fonction" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="vendeur">
           <Key>
@@ -80,7 +80,7 @@
           <Property Name="SALAIRE_VEND" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="COMMISSION" Type="decimal" Precision="6" Scale="2" Nullable="false" />
         </EntityType>
-        <Association Name="fk_login_user">
+        <Association Name="fk_user_login">
           <End Role="vendeur" Type="Self.vendeur" Multiplicity="1" />
           <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -187,7 +187,7 @@
           <EntitySet Name="detail_cde" EntityType="Self.detail_cde" Schema="commercial" store:Type="Tables" />
           <EntitySet Name="utilisateur" EntityType="Self.utilisateur" Schema="commercial" store:Type="Tables" />
           <EntitySet Name="vendeur" EntityType="Self.vendeur" Schema="commercial" store:Type="Tables" />
-          <AssociationSet Name="fk_login_user" Association="Self.fk_login_user">
+          <AssociationSet Name="fk_user_login" Association="Self.fk_user_login">
             <End Role="vendeur" EntitySet="vendeur" />
             <End Role="utilisateur" EntitySet="utilisateur" />
           </AssociationSet>

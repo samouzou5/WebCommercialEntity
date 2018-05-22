@@ -157,6 +157,7 @@
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\VendeurController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -274,6 +275,7 @@
     <Content Include="Views\Article\ListeArticlePartial.cshtml" />
     <Content Include="Views\Shared\_AccesInterdit.cshtml" />
     <Content Include="Views\Commande\Rechercher.cshtml" />
+    <Content Include="Views\Vendeur\InfoVendeurConnecte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

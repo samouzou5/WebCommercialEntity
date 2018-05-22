@@ -35,9 +35,10 @@ namespace WebCommercialEntity.Controllers
                 }
                 if(u.motDePasse == password && u.fonction.Equals("Admin"))
                 {
+                    vendeur vendeurLogue = unS.RechercheUnVendeur(username);
                     Session["login"] = username;
-                    Session["nom"] = u.nom;
-                    Session["prenom"] = u.prenom;
+                    Session["nom"] = vendeurLogue.NOM_VEND;
+                    Session["prenom"] = vendeurLogue.PRENOM_VEND;
                     Session["fonction"] = u.fonction;
                     return RedirectToAction("Index","Commande");
                 }

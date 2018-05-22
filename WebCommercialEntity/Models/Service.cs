@@ -53,6 +53,25 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        public vendeur RechercheUnVendeur(string username)
+        {
+            Serreurs er = new Serreurs("Erreur sur recherche d'un vendeur.",
+                "Vendeur.RechercherUnVendeur()");
+            vendeur unVendeur;
+            try
+            {
+                unVendeur = (from v in unCommercial.vendeur
+                               where v.NO_VENDEUR == username
+                               select v).FirstOrDefault();
+                return unVendeur;
+            }
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+        }
+
 
 
 
@@ -427,7 +446,7 @@ namespace WebCommercialEntity.Models
                                           where entry.EntityKey != null
                                           select entry.Entity).ToList();
 
-                objectContext.Refresh(RefreshMode.StoreWins, refreshableObjects); ;
+                objectContext.Refresh(RefreshMode.StoreWins, refreshableObjects);
 
             }
 
@@ -474,5 +493,6 @@ namespace WebCommercialEntity.Models
             }
 
         }
+
     }
 }
