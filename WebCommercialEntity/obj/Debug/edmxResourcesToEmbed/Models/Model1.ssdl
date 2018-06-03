@@ -58,9 +58,7 @@
     </Key>
     <Property Name="idLogin" Type="char" MaxLength="6" Nullable="false" />
     <Property Name="motDePasse" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="fonction" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fonction" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="vendeur">
     <Key>

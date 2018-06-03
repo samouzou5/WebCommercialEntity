@@ -17,8 +17,6 @@ namespace WebCommercialEntity.Models
         public string idLogin { get; set; }
         public string motDePasse { get; set; }
         public string fonction { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
     
         public virtual vendeur vendeur { get; set; }
     }

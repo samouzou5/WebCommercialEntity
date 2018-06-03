@@ -63,9 +63,7 @@
           </Key>
           <Property Name="idLogin" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="motDePasse" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="fonction" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fonction" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="vendeur">
           <Key>
@@ -338,8 +336,6 @@
           <Property Name="idLogin" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="motDePasse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fonction" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="vendeur" Relationship="CommercialModel.fk_login_u" FromRole="utilisateur" ToRole="vendeur" />
         </EntityType>
         <EntityType Name="vendeur">
@@ -519,8 +515,6 @@
           <EntitySetMapping Name="utilisateur">
             <EntityTypeMapping TypeName="CommercialModel.utilisateur">
               <MappingFragment StoreEntitySet="utilisateur">
-                <ScalarProperty Name="prenom" ColumnName="prenom" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="fonction" ColumnName="fonction" />
                 <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
                 <ScalarProperty Name="idLogin" ColumnName="idLogin" />

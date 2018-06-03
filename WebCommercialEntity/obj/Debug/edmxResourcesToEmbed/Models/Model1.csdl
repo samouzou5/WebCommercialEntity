@@ -114,8 +114,6 @@
     <Property Name="idLogin" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Name="motDePasse" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="fonction" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="vendeur" Relationship="CommercialModel.fk_login_u" FromRole="utilisateur" ToRole="vendeur" />
   </EntityType>
   <EntityType Name="vendeur">

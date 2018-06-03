@@ -25,7 +25,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Polytech Commercial", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Session["login"] == null)
+                {
+                    @Html.ActionLink("Polytech Commercial", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Polytech Commercial", "Index", "Commande", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -40,56 +47,54 @@
                     </li>
                     @if (Session["login"] != null)
                     {
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Interroger<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Fiches</li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="/Client">Liste des Clients</a>
-                            </li>
-                            <li><a href="#">Fiche Vendeur</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Commandes</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/Commande">Liste des commandes</a></li>
-                            <li><a href="/Commande/Ajouter">Ajouter une nouvelle commande</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Article</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/Article/Index">Liste des articles</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gérer<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Gestion</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Ajouter Client</a></li>
-                            <li><a href="#">Modifier Article</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Produits</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/Article/AugmenterArticle">Augmenter Prix</a></li>
-                        </ul>
-                    </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Interroger<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Fiches</li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="/Client">Liste des Clients</a>
+                                </li>
+                                <li><a href="#">Fiche Vendeur</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Commandes</li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Commande">Liste des commandes</a></li>
+                                <li><a href="/Commande/Ajouter">Ajouter une nouvelle commande</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Article</li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Article/Index">Liste des articles</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gérer<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Gestion</li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Ajouter Client</a></li>
+                                <li><a href="#">Modifier Article</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Produits</li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Article/AugmenterArticle">Augmenter Prix</a></li>
+                            </ul>
+                        </li>
                     }
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Session["login"] == null)
-    {
-                <li>@Html.ActionLink("Se connecter", "Index", "Login")</li>
-}
-else
-{
-                <li class="dropdown" style="background-color:grey;">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;">Bonjour, @Session["prenom"] @Session["nom"]<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Mes informations","InfoVendeurConnecte","Vendeur")</li>
-                        <li>@Html.ActionLink("Déconnexion","Logoff","Login")</li>
-                    </ul>
-                </li>
-}
+                    {
+                        <li>@Html.ActionLink("Se connecter", "Index", "Login")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Mes informations", "InfoVendeurConnecte", "Vendeur")</li>
+                        <li>@Html.ActionLink("Déconnexion", "Logoff", "Login")</li>
+                        <li style="background-color:grey;color:white;float:right;">
+                            <a href="#" style="color:white;float:right;"><b>Bonjour, @Session["prenom"] @Session["nom"]</b></a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
