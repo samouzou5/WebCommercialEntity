@@ -13,6 +13,10 @@
     {
         @Html.Raw("<script type='text/javascript'>alert(\"" + TempData["success"] + "\");</script>");
     }
+    if(TempData["addCommand"] != null)
+    {
+        @Html.Raw("<script type='text/javascript'>alert('Commande ajoutée');</script>");
+    }
     <div class="container">
         <div class="col-md-11 col-sm-11">
             <div class="blanc">

@@ -7,24 +7,20 @@
 @if (Model != null && Session["login"] != null)
 {
 
-    using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+
 
         <div class="form-horizontal">
-            <h4>Vendeur</h4>
-            <label>Identifiant vendeur : </label><p>@Model.NO_VENDEUR</p>
-            <label>Nom vendeur: </label><p>@Model.NOM_VEND</p>
-            <label>Prénom vendeur :</label><p>@Model.PRENOM_VEND</p>
-            <label>Salaire vendeur :</label><p>@Model.SALAIRE_VEND</p>
-            <label>Commission : </label><p>@Model.COMMISSION</p>
-            <label>Date d'embauche :</label><p>@Model.DATE_EMBAU</p>
-            <label>Ville vendeur : </label><p>@Model.VILLE_VEND</p>
+            <h2>Informations sur le vendeur connecté :</h2>
+            <p><label>Identifiant vendeur : </label>&nbsp;@Model.NO_VENDEUR</p>
+            <p><label>Nom vendeur: </label>&nbsp;@Model.NOM_VEND</p>
+            <p><label>Prénom vendeur :</label>&nbsp;@Model.PRENOM_VEND</p>
+            <p><label>Salaire vendeur :</label>&nbsp;@Model.SALAIRE_VEND</p>
+            <p><label>Commission : </label>&nbsp;@Model.COMMISSION</p>
+            <p><label>Date d'embauche :</label>&nbsp;@Model.DATE_EMBAU</p>
+            <p><label>Ville vendeur : </label>&nbsp;@Model.VILLE_VEND</p>
             
         </div>
-            
-
-    }
+ 
 }
 else
 {

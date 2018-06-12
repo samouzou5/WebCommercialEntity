@@ -96,7 +96,7 @@ namespace WebCommercialEntity.Controllers
         }
 
         //Affiche la page contenant le formulaire pour ajouter une commande
-        public ActionResult Ajouter(bool? error)
+        public ActionResult Ajouter()
         {
             CommerceViewModel cvm = new CommerceViewModel();
             try
@@ -109,15 +109,13 @@ namespace WebCommercialEntity.Controllers
             }
             catch (MonException e)
             {
-                error = true;
                 return HttpNotFound();
-
             }
         }
 
         //méthode qui permet d'ajouter une commande en récupérant les données du formulaire
         [HttpPost]
-        public ActionResult Ajouter()
+        public ActionResult Ajouter(bool? error)
         {
             commandes newCommande = new commandes();
             try
@@ -129,10 +127,12 @@ namespace WebCommercialEntity.Controllers
                 newCommande.DATE_CDE = Convert.ToDateTime(Request["DATE_COMMANDE"]);
                 unS = Service.GetInstance();
                 unS.AjouterCommande(newCommande);
-                return View();
+                TempData["addCommand"] = true;
+                return RedirectToAction("Index","Commande");
             }
             catch(MonException e)
             {
+                error = true;
                 return HttpNotFound();
             }
         }
