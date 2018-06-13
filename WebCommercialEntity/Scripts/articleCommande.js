@@ -29,8 +29,9 @@
 
         $('#date_debut').datepicker({
             format: 'dd/mm/yyyy',
-            language: 'fr'
+            language: 'fr',
         });
+
 
         $('#date_fin').datepicker({
             format: 'dd/mm/yyyy',

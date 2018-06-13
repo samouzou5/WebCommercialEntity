@@ -12,9 +12,9 @@
     @Scripts.Render("~/Scripts/articleCommande.js")
     @RenderSection("scripts", required: false)
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.fr.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -72,7 +72,7 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Gestion</li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Ajouter Client</a></li>
+                                <li><a href="/Client/Ajouter">Ajouter Client</a></li>
                                 <li><a href="#">Modifier Article</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Produits</li>

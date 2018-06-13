@@ -55,11 +55,6 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
-        public ActionResult Success()
-        {
-            return View();
-        }
-
         public ActionResult Logoff()
         {
             Session["login"] = null;

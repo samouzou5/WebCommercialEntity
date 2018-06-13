@@ -87,6 +87,7 @@ namespace WebCommercialEntity.Controllers
                 commerceView.cs = uneC;
                 commerceView.lesClients = unS.ListClients();
                 commerceView.lesVendeurs = unS.ListVendeurs();
+                TempData["update"] = true;
                 return View(commerceView);
             }
             catch (MonException e)

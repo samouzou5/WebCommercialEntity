@@ -9,11 +9,15 @@
 
 @if (Model != null && Session["login"] != null)
 {
+    if (TempData["update"] != null)
+    {
+        @Html.Raw("<script type='text/javascript'>alert('Commande mise à jour');</script>");
+    }
 
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>Commande</h4>
             <hr />
@@ -98,7 +102,8 @@
 
     }
 }
-else{
+else
+{
     @Html.Partial("_AccesInterdit");
 }
 

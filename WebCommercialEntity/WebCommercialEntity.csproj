@@ -265,7 +265,6 @@
     <Content Include="Views\Client\Modifier.cshtml" />
     <Content Include="Views\Commande\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\Success.cshtml" />
     <Content Include="Views\Commande\Modifier.cshtml" />
     <Content Include="Views\Commande\Detail.cshtml" />
     <Content Include="Views\Commande\Ajouter.cshtml" />
@@ -276,6 +275,7 @@
     <Content Include="Views\Shared\_AccesInterdit.cshtml" />
     <Content Include="Views\Commande\Rechercher.cshtml" />
     <Content Include="Views\Vendeur\InfoVendeurConnecte.cshtml" />
+    <Content Include="Views\Client\Ajouter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    ViewBag.Title = "Connexion";
+}
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -17,9 +20,11 @@
             <label for="inputPassword" class="label label-default">Mot de passe</label>
             <input type="password" required class="form-control" name="password" id="inputPassword" placeholder="Mot de passe ...">
             <br />
-           
+
             <br />
             <button type="submit" class="btn btn-primary">Connexion</button>
+            <a href="/Home/Index" class="btn btn-info" role="button">Retourner à l'accueil</a>
+
         </form>
         @if (TempData["error"] != null && (bool)TempData["error"])
         {
