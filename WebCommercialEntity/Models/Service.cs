@@ -72,24 +72,6 @@ namespace WebCommercialEntity.Models
             }
         }
 
-        public void AjouterClient(clientel c)
-        {
-            Serreurs er = new Serreurs("Erreur sur l'ajout d'un client",
-                 "Client.AjouterClient()");
-            try
-            {
-                unCommercial.clientel.Add(c);
-                unCommercial.SaveChanges();
-            }
-            catch (MonException e)
-            {
-                throw new MonException(er.MessageUtilisateur(),
-                    er.MessageApplication(), e.Message);
-            }
-        }
-
-
-
 
         ///
         ///  Classe Clientel
