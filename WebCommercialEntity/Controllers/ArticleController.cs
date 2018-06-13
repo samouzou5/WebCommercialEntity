@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebCommercialEntity.Models;
+using WebCommercialEntity.Models.MesExceptions;
 
 namespace WebCommercialEntity.Controllers
 {
@@ -74,6 +75,36 @@ namespace WebCommercialEntity.Controllers
             }
         }
 
-        
+        //vue modifier un article
+        public ActionResult Modifier(string id)
+        {
+            try
+            {
+                unS = Service.GetInstance();
+                articles unCl = unS.RechercheUnArticle(id);
+                return View(unCl);
+            }
+            catch (MonException e)
+            {
+                return HttpNotFound();
+
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Modifier(articles a)
+        {
+            try
+            {
+                unS = Service.GetInstance();
+                unS.ModifierArticle(a);
+                return RedirectToAction("Index", "Article");
+            }catch(MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
+
+
     }
 }

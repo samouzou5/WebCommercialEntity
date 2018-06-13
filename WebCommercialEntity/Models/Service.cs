@@ -72,6 +72,58 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        public articles RechercheUnArticle(string id)
+        {
+            Serreurs er = new Serreurs("Erreur sur recherche d'un article.",
+                "Article.RechercherUnArticle()");
+            articles unArticle;
+            try
+            {
+                unArticle = (from a in unCommercial.articles
+                             where a.NO_ARTICLE == id
+                             select a).FirstOrDefault();
+                return unArticle;
+            }
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+        }
+
+        public void ModifierArticle(articles art)
+        {
+            Serreurs er = new Serreurs("Erreur sur la modification d'un article",
+                 "modifierArticle");
+            // requête de sélection pour une mise à jour .
+
+            var unarticle = from a in unCommercial.articles
+                           where a.NO_ARTICLE == art.NO_ARTICLE
+                           select a;
+
+            // On modifie les données 
+            foreach (articles ligne in unarticle)
+            {
+                ligne.NO_ARTICLE = art.NO_ARTICLE;
+                ligne.LIB_ARTICLE = art.LIB_ARTICLE;
+                ligne.INTERROMPU = art.INTERROMPU;
+                ligne.PRIX_ART = (decimal)art.PRIX_ART;
+                ligne.QTE_DISPO = (int)art.QTE_DISPO;
+                ligne.VILLE_ART = art.VILLE_ART;
+            }
+
+            // On enregistre les modifications dans la base de données .
+            try
+            {
+                unCommercial.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new MonException(er.MessageUtilisateur(),
+                    er.MessageApplication(), e.Message);
+            }
+        }
+
 
         ///
         ///  Classe Clientel

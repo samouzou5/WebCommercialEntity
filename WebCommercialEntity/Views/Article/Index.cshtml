@@ -30,18 +30,24 @@
                             <th>Quantité disponible</th>
                             <th>Statut</th>
                             <th>Ville article</th>
+                            <th>Modifier</th>
                         </tr>
                     </thead>
                     @foreach (DataRow dataRow in Model.Rows)
                     {
-                        <tr>
-                            @foreach (var item in dataRow.ItemArray)
-                            {
-                                <td>
-                                    @item.ToString()
-                                </td>
-                            }
-                        </tr>
+                    <tr>
+                        @foreach (var item in dataRow.ItemArray)
+                        {
+                            <td>
+                                @item.ToString()
+                            </td>
+                        }
+                        <td style="text-align:center;">
+                            <span>
+                                @Html.ActionLink("  ", "Modifier", "Article", new { id = dataRow[0] }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
+                            </span>
+                        </td>
+                    </tr>
 
                     }
 

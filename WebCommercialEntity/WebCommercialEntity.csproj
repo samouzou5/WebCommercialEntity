@@ -276,6 +276,7 @@
     <Content Include="Views\Commande\Rechercher.cshtml" />
     <Content Include="Views\Vendeur\InfoVendeurConnecte.cshtml" />
     <Content Include="Views\Client\Ajouter.cshtml" />
+    <Content Include="Views\Article\Modifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
