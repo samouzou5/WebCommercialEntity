@@ -5,6 +5,7 @@ Fonctionnalités implémentées :
 - Implémentation d'une page qui affiche les infos du vendeur connecté (lien Mes informations)
 - Recherche de commandes entre 2 dates
 - Affichage de la liste des articles et possibilité de les modifier
+- Page de login non acessible si on est logué
 - Procédure pour mettre à jour le prix des articles (en AJAX)
 - Accès interdit aux pages si on est pas connecté
 - Contrôles JS sur des formulaires comme celui de la recherche
