@@ -194,7 +194,7 @@ namespace WebCommercialEntity.Models
             }
         }
 
-        
+        //liste des clients
         public List<clientel> ListClients()
         {
 
@@ -213,7 +213,7 @@ namespace WebCommercialEntity.Models
                     er.MessageApplication(), e.Message);
             }
         }
-
+        //liste des vendeurs
         public List<vendeur> ListVendeurs()
         {
             Serreurs er = new Serreurs("Erreur sur lecture des vendeurs.",
@@ -232,6 +232,7 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        //retourne les commandes situées entre 2 dates
         public DataTable RechercheCommandesSurPeriode(string date_debut, string date_fin)
         {
 
@@ -277,6 +278,7 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        //liste des articles
         public List<articles> ListArticles()
         {
             Serreurs er = new Serreurs("Erreur sur lecture des articles.",
@@ -373,6 +375,7 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        //permet de modifier une commande
         public void ModifierCommande(commandes uneC)
         {
 
@@ -438,6 +441,7 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        //permet d'ajouter une commande avec en paramètre un objet commandes
         public void AjouterCommande(commandes c)
         {
             Serreurs er = new Serreurs("Erreur sur l'ajout d'une commande",
@@ -454,6 +458,7 @@ namespace WebCommercialEntity.Models
             }
         }
 
+        //permet de supprimer une commande selon le numéro de la commande
         public void SupprimerCommande(String no_cmd)
         {
             Serreurs er = new Serreurs("Erreur sur la suppression de commande.", "Commande.SupprimerCommande()");
@@ -475,6 +480,7 @@ namespace WebCommercialEntity.Models
 
         }
 
+        //appelle la procédure permettant de modifier le prix d'un article
         public Service ModifierPrixArticles(String value)
         {
             Serreurs er = new Serreurs("Erreur sur l'augmentation du prix des articles", "Article.ModifierPrixArticles()");
@@ -506,6 +512,7 @@ namespace WebCommercialEntity.Models
             return this;
         }
 
+        //récupère la liste des articles
         public DataTable GetLesArticles(String tri = "NO_ARTICLE", String ordre = "ASC")
         {
 
